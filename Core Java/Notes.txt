@@ -1,1 +1,5 @@
+String.valueOf(x) 
+can convert almost any primitive or object into a String.
 
+.repeat(n) 
+can only be used on a String and repeats it n times.
