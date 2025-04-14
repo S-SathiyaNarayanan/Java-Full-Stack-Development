@@ -1,4 +1,4 @@
-public class ArithmeticOperations {
+public class ArithmeticOperators {
     public static void main(String[] args) {
         // Declare two numbers
         int num1 = 20, num2 = 13;
