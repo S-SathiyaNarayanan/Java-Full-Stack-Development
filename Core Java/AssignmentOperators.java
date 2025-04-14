@@ -42,7 +42,7 @@ public class AssignmentOperators {
         System.out.println("\nMultiple assignments:");
         System.out.println("x = " + x + ", y = " + y + ", z = " + z);
 
-        // Type conversion demonstration
+        // Automatic Type conversion demonstration
         System.out.println("\nType conversion in assignments:");
         int integerValue = OriginalNumber;
         integerValue += 2.5;  // Automatic type conversion
