@@ -28,7 +28,7 @@ Instead:
 ============================================================
 */
 
-public class Main {
+public class StringBasics {
 
     public static void main(String[] args) {
 
