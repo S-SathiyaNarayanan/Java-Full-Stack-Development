@@ -30,7 +30,7 @@ Instead:
 ============================================================
 */
 
-public class StringBasics {
+public class String {
 
     public static void main(String[] args) {
 
