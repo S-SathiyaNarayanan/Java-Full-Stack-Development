@@ -46,7 +46,7 @@ Modification changes SAME object.
 ====================================================================
 */
 
-public class Main {
+public class StringBuilderAndStringBuffer {
 
     public static void main(String[] args) {
 
