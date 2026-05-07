@@ -1,6 +1,6 @@
 /*
 ============================================================
-                      JAVA STRINGS   
+                      JAVA STRINGS
 ============================================================
 
 This program covers:
@@ -12,10 +12,12 @@ This program covers:
 5. == vs equals()
 6. String immutability
 7. Why reassignment is needed
-8. Common String methods
-9. Memory/reference behavior
-10. String traversal
-11. Important beginner mistakes
+8. String concatenation techniques
+9. StringBuilder and StringBuffer
+10. Common String methods
+11. Memory/reference behavior
+12. String traversal
+13. Important beginner mistakes
 
 VERY IMPORTANT CORE IDEA:
 -------------------------
@@ -207,6 +209,308 @@ public class StringBasics {
 
 
 
+
+        /*
+        ============================================================
+        6A. CONCATENATION USING +
+        ============================================================
+
+        + is the MOST COMMON String concatenation operator.
+
+        Example:
+        */
+
+        String plus1 = "Hello";
+        String plus2 = "World";
+
+
+        /*
+        Internally:
+
+        Java creates NEW String object:
+
+            "HelloWorld"
+
+        IMPORTANT:
+        -----------
+        Existing objects are NOT modified.
+
+        Since Strings are immutable,
+        + always produces NEW String object.
+        */
+
+        String plusResult = plus1 + plus2;
+
+        System.out.println("Using + : " + plusResult);
+
+
+
+
+        /*
+        ============================================================
+        6B. CONCATENATION USING +=
+        ============================================================
+
+        += is shorthand form of:
+
+            s = s + value
+
+        VERY IMPORTANT:
+        ----------------
+        This DOES NOT modify original String.
+
+        It creates NEW String object
+        and updates reference variable.
+        */
+
+        String addAssign = "Java";
+
+
+        /*
+        Internally this becomes:
+
+            addAssign = addAssign + " Backend"
+
+        NEW object created:
+
+            "Java Backend"
+        */
+
+        addAssign += " Backend";
+
+        System.out.println("Using += : " + addAssign);
+
+
+
+
+        /*
+        ============================================================
+        6C. concat() METHOD
+        ============================================================
+
+        concat() joins Strings.
+
+        Syntax:
+
+            str.concat(otherString)
+
+        IMPORTANT:
+        ------------
+        concat() ALSO creates NEW object.
+        */
+
+        String concat1 = "Spring";
+
+
+        /*
+        NEW object created:
+
+            "Spring Boot"
+
+        But if result is ignored,
+        variable still points to old object.
+        */
+
+        concat1.concat(" Boot");
+
+        System.out.println("concat without reassignment : " + concat1);
+
+
+        /*
+        Correct usage:
+        store returned reference.
+        */
+
+        concat1 = concat1.concat(" Boot");
+
+        System.out.println("concat with reassignment : " + concat1);
+
+
+
+
+        /*
+        ============================================================
+        6D. String.join()
+        ============================================================
+
+        Used to join multiple Strings
+        using separator/delimiter.
+        */
+
+        String joined = String.join(
+                "-",
+                "Java",
+                "SQL",
+                "Spring"
+        );
+
+        System.out.println("String.join : " + joined);
+
+
+        /*
+        Output:
+
+        Java-SQL-Spring
+        */
+
+
+
+
+        /*
+        ============================================================
+        6E. String.format()
+        ============================================================
+
+        Used for formatted String creation.
+
+        %s -> String placeholder
+        %d -> integer placeholder
+        %f -> floating point placeholder
+        */
+
+        String student = "Sathiya";
+        int age = 24;
+
+
+        /*
+        Java creates formatted NEW String object.
+        */
+
+        String formatted =
+                String.format(
+                        "Name: %s Age: %d",
+                        student,
+                        age
+                );
+
+        System.out.println("String.format : " + formatted);
+
+
+
+
+        /*
+        ============================================================
+        6F. IMPORTANT PERFORMANCE CONCEPT
+        ============================================================
+
+        Repeated String concatenation creates
+        MANY temporary objects.
+
+        Example:
+        */
+
+        String temp = "";
+
+        temp += "A";
+        temp += "B";
+        temp += "C";
+
+
+        /*
+        Possible objects created:
+
+        ""
+        "A"
+        "AB"
+        "ABC"
+
+        This wastes memory and time.
+
+        Because:
+        ---------
+        Each concatenation creates NEW object.
+        */
+
+
+
+
+        /*
+        ============================================================
+        6G. WHY StringBuilder EXISTS
+        ============================================================
+
+        StringBuilder solves repeated
+        concatenation problem.
+
+        Unlike String:
+
+            SAME object is modified.
+
+        NEW object is NOT created repeatedly.
+        */
+
+        StringBuilder sb = new StringBuilder("Java");
+
+
+        /*
+        append() modifies same object internally.
+        */
+
+        sb.append(" Backend");
+        sb.append(" Developer");
+
+        System.out.println("StringBuilder : " + sb);
+
+
+
+
+        /*
+        ============================================================
+        6H. StringBuffer
+        ============================================================
+
+        StringBuffer is similar to StringBuilder.
+
+        Difference:
+        -----------
+        StringBuffer is THREAD SAFE.
+
+        Meaning:
+        --------
+        Multiple threads can safely use it.
+
+        But because of extra safety:
+        ----------------------------
+        It is slower than StringBuilder.
+        */
+
+        StringBuffer sbf = new StringBuffer("Hello");
+
+        sbf.append(" World");
+
+        System.out.println("StringBuffer : " + sbf);
+
+
+
+
+        /*
+        ============================================================
+        6I. SIMPLE MEMORY RULE
+        ============================================================
+
+        NORMAL STRING:
+        --------------
+            +
+            +=
+            concat()
+            replace()
+            trim()
+            substring()
+
+        Usually create NEW String objects.
+
+
+        StringBuilder/StringBuffer:
+        ---------------------------
+        append()
+
+        Usually modifies SAME object.
+        ============================================================
+        */
+
+
+
+
         /*
         ============================================================
         7. toUpperCase()
@@ -240,6 +544,7 @@ public class StringBasics {
 
 
 
+
         /*
         ============================================================
         8. toLowerCase()
@@ -251,6 +556,7 @@ public class StringBasics {
         str2 = str2.toLowerCase();
 
         System.out.println("toLowerCase : " + str2);
+
 
 
 
@@ -270,6 +576,7 @@ public class StringBasics {
 
 
 
+
         /*
         ============================================================
         10. trim()
@@ -286,6 +593,7 @@ public class StringBasics {
 
 
 
+
         /*
         ============================================================
         11. substring()
@@ -299,9 +607,10 @@ public class StringBasics {
 
         String str5 = "Programming";
 
-        str5 = str5.substring(0,4);
+        str5 = str5.substring(0, 4);
 
         System.out.println("substring : " + str5);
+
 
 
 
@@ -320,6 +629,8 @@ public class StringBasics {
         */
 
 
+
+
         /*
         length()
         --------
@@ -331,6 +642,8 @@ public class StringBasics {
         System.out.println("length : " + info.length());
 
 
+
+
         /*
         charAt(index)
         -------------
@@ -338,6 +651,8 @@ public class StringBasics {
         */
 
         System.out.println("charAt(1) : " + info.charAt(1));
+
+
 
 
         /*
@@ -349,6 +664,8 @@ public class StringBasics {
         System.out.println("contains av : " + info.contains("av"));
 
 
+
+
         /*
         indexOf()
         ---------
@@ -356,6 +673,7 @@ public class StringBasics {
         */
 
         System.out.println("indexOf('v') : " + info.indexOf('v'));
+
 
 
 
@@ -391,11 +709,14 @@ public class StringBasics {
 
 
 
+
         /*
         ============================================================
         14. IMPORTANT BEGINNER MISTAKES
         ============================================================
         */
+
+
 
 
         /*
@@ -409,11 +730,15 @@ public class StringBasics {
         */
 
 
+
+
         /*
         CORRECT:
 
             s1.equals(s2)
         */
+
+
 
 
         /*
@@ -427,6 +752,8 @@ public class StringBasics {
         */
 
 
+
+
         /*
         WRONG:
 
@@ -438,6 +765,7 @@ public class StringBasics {
 
             str.charAt(0)
         */
+
 
 
 
